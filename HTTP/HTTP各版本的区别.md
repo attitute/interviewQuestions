@@ -46,7 +46,7 @@ content-type: text/html; charset=UTF-8;
     3. 添加Host字段 表示当前域名 （虚拟主机实现了一个ip多个域名） 
     5. 客户端Cookie、安全机制（https）
 
-    目前浏览器只允许同时建立6个TCP持久连接
+    目前浏览器只允许一个域名同时建立6个TCP持久连接
 
 ```javascript
     
