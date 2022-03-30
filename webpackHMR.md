@@ -1,4 +1,6 @@
+## webpackHMR原理
 1. webpack的watch会监听文件的变化，watch监听到文件变化后，根据配置文件对模块重新编译打包，打包后的代码保存在内存中
+
 2. webpack和webpack-dev-serve的中间件webpack-dev-middleware之间的交互，webpack-dev-middleware调用webpack暴露的API对代码变化进行监控，并且告诉webpack将代码打包到内存中
 
 3. webpack-dev-serve对文件变化进行监控，当我们配置了devServer.watchContentBase: true,Serve会监听这些配置文件中静态文件的变化，变化后会通知浏览器对应用进行live reload，浏览器刷新（不是HRM）
@@ -7,15 +9,15 @@
 
 5. webpack-dev-server/client端并不能发请求也不会热更新操作，webpack/hot/client根据webpack-dev-server/client传输的数据与dev-server的配置决定刷新浏览器还是进行热模块更新
 
-6. webpack/hot/client将hash值传送给HoteModuleReplacement.runtime,通过JsonpMainTemplate.runtime向server断发送Ajax请求， 服务端返回一个json，该json包含了所有要更新的模块的hash值，获取到更新列表，通过Jsonp请求获取最新模块的代码
+6. webpack/hot/client将hash值传送给HoteModuleReplacement.runtime,通过JsonpMainTemplate.runtime向server端发送Ajax请求， 服务端返回一个json，该json包含了所有要更新的模块的hash值，获取到更新列表，通过Jsonp请求获取最新模块的代码
 
-7. HotModulePlugin将会对新旧模块进行对比，决定是否更新模块，在决定更新模块后检查模块间的依赖关系，更新模块的同事更新模块间的依赖引用
+7. HotModulePlugin将会对新旧模块进行对比，决定是否更新模块，在决定更新模块后检查模块间的依赖关系，更新模块的同时更新模块间的依赖引用
 
 8. 如果HMR失败，回退到live reload操作浏览器刷新获取最新打包代码
 
 
 
-6、webpack的构建流程是什么?从读取配置到输出文件这个过程尽量说全
+## webpack的构建流程是什么?从读取配置到输出文件这个过程尽量说全
 
 Webpack 的运行流程是一个串行的过程，从启动到结束会依次执行以下流程：
 
