@@ -23,3 +23,5 @@ console.log(GetQueryString(url, 'project_id'))
 var params = new URLSearchParams('?'+url.split('?')[1])
 console.log(params.get('pid'))
 
+
+new RegExp("(^|[?|&])"+target+"=([^&]*)")
